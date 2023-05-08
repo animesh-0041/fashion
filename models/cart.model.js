@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const cartSchema = mongoose.Schema({
   image: {type:String,required:true},
-  offerType: {type:String,required:true},
+  offerType: {type:String},
   Price:{type:Number,required:true},
   ogPrice: {type:Number,required:true},
   discount: {type:Number,required:true},
