@@ -48,13 +48,13 @@ brand
    }
     else if(query.brand){
             // console.log(query.brand);
-            const data=await ProductModel.find({brand:query.brand})
+            const data=await ProductModel.find({brand:query.brand,gender:"mens"})
             res.send(data)
 
         }
        
         else if(query.offers){
-            const data=await ProductModel.find({offerType:query.offers})
+            const data=await ProductModel.find({offerType:query.offers,gender:"mens"})
             res.send(data)
         }
         else if(query.price && query.price=="asc"){
@@ -68,10 +68,11 @@ brand
         else if(query.discount){
             console.log(query.discount);
             if(query.discount==20){
-                const data=await ProductModel.find({discount: {$lte:+query.discount}})
+                //{discount: {$lte:+query.discount}
+                const data=await ProductModel.find({$and:[{discount:{$lte:+query.discount}},{gender:"mens"}]})
                 res.send(data)
             }else {
-                const data=await ProductModel.find({$and:[{discount:{$gt:(+query.discount)-20}},{discount:{$lte:+query.discount}}]
+                const data=await ProductModel.find({$and:[{discount:{$gt:(+query.discount)-20}},{discount:{$lte:+query.discount}},{gender:"mens"}]
                    
                   })
                 res.send(data)
@@ -104,12 +105,12 @@ productRoute.get("/womens",async(req,res)=>{
     const query=req.query
     try {
         if(query.brand){
-            const mansData=await ProductModel.find({brand:query.brand})
+            const mansData=await ProductModel.find({brand:query.brand,gender:"womens"})
             res.send(mansData)
 
         }
         else if(query.offers){
-            const data=await ProductModel.find({offerType:query.offers})
+            const data=await ProductModel.find({offerType:query.offers,gender:"womens"})
             res.send(data)
         }
         else if(query.price && query.price=="asc"){
@@ -123,10 +124,10 @@ productRoute.get("/womens",async(req,res)=>{
         else if(query.discount){
             console.log(query.discount);
             if(query.discount==20){
-                const data=await ProductModel.find({discount: {$lte:+query.discount}})
+                const data=await ProductModel.find({$and:[{discount:{$lte:+query.discount}},{gender:"womens"}]})
                 res.send(data)
             }else {
-                const data=await ProductModel.find({$and:[{discount:{$gt:(+query.discount)-20}},{discount:{$lte:+query.discount}}]
+                const data=await ProductModel.find({$and:[{discount:{$gt:(+query.discount)-20}},{discount:{$lte:+query.discount}},{gender:"womens"}]
                    
                   })
                 res.send(data)
