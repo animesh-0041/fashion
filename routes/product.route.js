@@ -58,11 +58,11 @@ brand
             res.send(data)
         }
         else if(query.price && query.price=="asc"){
-            const data=await ProductModel.find().sort({Price:1})
+            const data=await ProductModel.find({gender:"mens"}).sort({Price:1})
             res.send(data)
         }
         else if(query.price && query.price=="desc"){
-            const data=await ProductModel.find().sort({Price:-1})
+            const data=await ProductModel.find({gender:"mens"}).sort({Price:-1})
             res.send(data)
         }
         else if(query.discount){
@@ -113,11 +113,11 @@ productRoute.get("/womens",async(req,res)=>{
             res.send(data)
         }
         else if(query.price && query.price=="asc"){
-            const data=await ProductModel.find().sort({Price:1})
+            const data=await ProductModel.find({gender:"womens"}).sort({Price:1})
             res.send(data)
         }
         else if(query.price && query.price=="desc"){
-            const data=await ProductModel.find().sort({Price:-1})
+            const data=await ProductModel.find({gender:"womens"}).sort({Price:-1})
             res.send(data)
         }
         else if(query.discount){
