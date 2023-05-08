@@ -4,9 +4,24 @@ const {auth}=require("../middlewares/auth.middleware")
 const productRoute=express.Router()
 
 //read  mens
+
+productRoute.get("/mens/:id",async(req,res)=>{
+    const {id}=req.params
+    try {
+        const data=await ProductModel.find({_id:id});
+        res.send(data)
+        
+    } catch (error) {
+        res.send(error)
+    }
+})
+
+
+
 productRoute.get("/mens",async(req,res)=>{
     const query=req.query
-    // console.log(query);
+    const params=req.params
+    console.log("params",params);
 
 
 /*
@@ -17,11 +32,21 @@ brand
 */
 
     try {
-        if(query.brand && query.price){
-            const data=await ProductModel.find({brand:query.brand}).sort({Price:query.price=="asc"?1:-1})
-            res.send(data)
-        }
-        else if(query.brand){
+        
+    //    else if(query.brand && query.discount){
+    //         const data=await ProductModel.find({brand:query.brand})
+    //         res.send(data)
+    //     }
+    if(query.brand && query.price){
+       // console.log(query);
+       const data=await ProductModel.find({brand:query.brand}).sort({Price:query.price=="asc"?1:-1})
+       res.send(data)
+   }
+   else if(query.brand && query.discount){
+        const data=await ProductModel.find({brand:query.brand,discount:query.discount})
+        res.send(data)
+   }
+    else if(query.brand){
             // console.log(query.brand);
             const data=await ProductModel.find({brand:query.brand})
             res.send(data)
@@ -63,6 +88,18 @@ brand
     }
 })
 //read  womens
+
+productRoute.get("/womens/:id",async(req,res)=>{
+    const {id}=req.params
+    try {
+        const data=await ProductModel.find({_id:id});
+        res.send(data)
+        
+    } catch (error) {
+        res.send(error)
+    }
+})
+
 productRoute.get("/womens",async(req,res)=>{
     const query=req.query
     try {
