@@ -27,6 +27,7 @@ cartRouter.get("/", async (req, res) => {
 
 //add new product to cart
 cartRouter.post("/add", async (req, res) => {
+  req.body.quantity=1
   const payload = req.body;
   try {
     const post = new cartModel(payload);
