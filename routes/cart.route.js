@@ -4,6 +4,15 @@ const {userAuth}=require("../middlewares/users.middlewares")
 const {ProductModel}=require("../models/product.model");
 const cartRouter = express.Router();
 
+cartRouter.get("/dummy",async(req,res)=>{
+  try {
+    const data=await cartModel.find();
+    res.send(data)
+  } catch (error) {
+    res.send(error)
+  }
+})
+
 cartRouter.use(userAuth)
 //getting all the products
 cartRouter.get("/", async (req, res) => {

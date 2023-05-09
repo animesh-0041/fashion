@@ -34,7 +34,7 @@ brand
     //     }
     if (query.brand && query.price) {
       // console.log(query);
-      const data = await ProductModel.find({ brand: query.brand }).sort({
+      const data = await ProductModel.find({ brand: query.brand,gender:"mens" }).sort({
         Price: query.price == "asc" ? 1 : -1,
       });
       res.send(data);
