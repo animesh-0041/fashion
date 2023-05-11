@@ -78,6 +78,20 @@ cartRouter.delete("/delete/:id", async (req, res) => {
   }
 });
 
+//delete all cart product current user
+cartRouter.delete("/delete", async (req, res) => { 
+  try {
+        await cartModel.deleteMany({ userID: req.body.userID });
+        res.status(200).send({ "msg": `product ${id} has been deleted` });
+    
+
+
+  } catch (error) {
+    res.status(404).send(error);
+  }
+});
+
+
 module.exports = {
   cartRouter
 };
