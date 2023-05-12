@@ -41,15 +41,14 @@ adminRouter.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    let admin = await adminModel.find({ email });
-    if (admin.length > 0) {
-      const passMatch = await bcrypt.compare(password, admin[0].password);
+    let admin = await adminModel.findOne({ email });
+    if (admin) {
+      const passMatch = await bcrypt.compare(password, admin.password);
 
       if (passMatch) {
         const token = jwt.sign(
           {
-            adminID: admin[0]._id,
-            exp: Math.floor(Date.now() / 1000) + 60 * 60,
+            adminID: admin._id,
           },
           "admin"
         );
