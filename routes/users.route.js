@@ -41,10 +41,10 @@ userRoute.post("/login",async(req,res)=>{
                 bcrypt.compare(password, user.password, (err, result)=> {
                    if(result){
                     const token=jwt.sign({firstName: user.firstName,lastName:user.lastName,userID:user._id }, "users")
-                        res.send({"msg":"login successful","token":token})
+                        res.send({"msg":"login successful","token":token,"email":user.email,"name":user.firstName+" "+user.lastName})
                       
                    }else{
-                    res.status(400).send({"msg":"Incorrect password!"})
+                    res.send({"msg":"Incorrect password!"})
                    }
                 });
                 
