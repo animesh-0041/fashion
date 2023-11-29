@@ -44,7 +44,7 @@ userRoute.post("/login",async(req,res)=>{
                         res.send({"msg":"login successful","token":token,"email":user.email,"name":user.firstName+" "+user.lastName})
                       
                    }else{
-                    res.send({"msg":"Incorrect password!"})
+                    res.status(400).send({"msg":"Incorrect password!"})
                    }
                 });
                 
